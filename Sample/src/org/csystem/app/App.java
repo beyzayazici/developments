@@ -39,6 +39,7 @@ class GetDigitsTest {
 
         System.out.println("Tekrar yapıyor musunuz?");
         System.out.println();
+        System.out.println();
     }
 }
 
