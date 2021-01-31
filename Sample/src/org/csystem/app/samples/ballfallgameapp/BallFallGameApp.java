@@ -1,6 +1,10 @@
 package org.csystem.app.samples.ballfallgameapp;
 
 public class BallFallGameApp {
+	private BallFallGameApp()
+	{
+	}
+
 	public static void run()
 	{
 		java.util.Scanner kb = new java.util.Scanner(System.in);
@@ -13,6 +17,6 @@ public class BallFallGameApp {
 		BallGame ballGame = new BallGame();
 		
 		ballGame.play(width, height);
-		System.out.println(ballGame.result);
+		System.out.println(ballGame.getResult());
 	}
 }

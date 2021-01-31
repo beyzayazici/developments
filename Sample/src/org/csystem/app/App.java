@@ -1,46 +1,34 @@
 /*----------------------------------------------------------------------------------------------------------------------
-	Sınıf Çalışması: Parametresi ile aldığı long türden bir sayının en fazla 3 basamaklı ayrılmış sayılarından
-	oluşan diziyi döndüren getDigitsInThrees metodunu NumberUtil sınıfı içerisinde yazınız ve test ediniz:
-	Örnek:
-	1234567 -> 1 234 567
-	1234 -> 1 234
-	34789 -> 34 789
-	234567 -> 234 567
+    Türemiş sınıf türünden referans taban sınıf türünden referansa doğrudan atanabilir (upcasting)
+    Çünkü türemiş sınıf nesnesi içerisinde zaten taban sınıf nesnesi vardır. Dolayısıyla o bölümün adresi atandığında
+    problem oluşmaz
 ----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app;
-
-import org.csystem.util.ArrayUtil;
-import org.csystem.util.NumberUtil;
-
-import java.util.Scanner;
 
 class App {
     public static void main(String [] args)
     {
-        GetDigitsTest.run();
+        B y = new B();
+        A x;
+
+        x = y; //upcasting
+
+        y.a = 10;
+        y.b = 30;
+
+        System.out.printf("x.a = %d%n", x.a);
+
+        x.a = 45;
+        System.out.printf("y.a = %d%n", y.a);
+
+        System.out.println(x == y); //true
     }
 }
 
-class GetDigitsTest {
-    public static void run()
-    {
-        Scanner kb = new Scanner(System.in);
-        for (;;) {
-            System.out.print("Bir sayı giriniz:");
-            long val = Long.parseLong(kb.nextLine());
-
-            ArrayUtil.display(NumberUtil.getDigits(val));
-            ArrayUtil.display(NumberUtil.getDigitsInTwos(val));
-            ArrayUtil.display(NumberUtil.getDigitsInThrees(val));
-
-            if (val == 0)
-                break;
-        }
-
-        System.out.println("Tekrar yapıyor musunuz?");
-        System.out.println();
-        System.out.println();
-        System.out.println();
-    }
+class A {
+    public int a;
 }
 
+class B extends A {
+    public int b;
+}

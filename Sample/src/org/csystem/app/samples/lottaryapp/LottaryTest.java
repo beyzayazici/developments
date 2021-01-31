@@ -5,6 +5,10 @@ import org.csystem.util.ArrayUtil;
 import java.util.Scanner;
 
 public class LottaryTest {
+    private LottaryTest()
+    {
+    }
+
     public static void run()
     {
         Lottary lottary = new Lottary();
@@ -17,8 +21,7 @@ public class LottaryTest {
             if (n <= 0)
                 break;
 
-            for (int i = 0; i < n; ++i)
-                ArrayUtil.display(2, lottary.getColumn());
+            ArrayUtil.display(2, lottary.getNumbers(n));
 
             System.out.println("/////////////////////");
         }

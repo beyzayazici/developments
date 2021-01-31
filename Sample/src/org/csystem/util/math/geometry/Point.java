@@ -9,6 +9,11 @@ public class Point {
     public int x;
     public int y;
 
+    Point(Point other)
+    {
+        this(other.x, other.y);
+    }
+
     public Point()
     {
     }

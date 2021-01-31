@@ -9,6 +9,44 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 public class NumberUtil {
+    private static final String [] ONES = {"", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"};
+    private static final String [] TENS = {"", "on", "yürmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"};
+
+    private static String getTextByDigits(int a, int b, int c)
+    {
+        String result = "";
+
+        if (a != 0) {
+            if (a != 1)
+                result += ONES[a];
+            result += "yüz";
+        }
+
+        if (b != 0)
+            result += TENS[b];
+
+        if (c != 0)
+            result += ONES[c];
+
+        return result;
+    }
+
+    private static String numberToText3DigitsTR(int val)
+    {
+        if (val == 0)
+            return "sıfır";
+
+        String result = "";
+
+        val = Math.abs(val);
+
+        int a = val / 100;
+        int b = val / 10 % 10;
+        int c = val % 10;
+
+        return result + getTextByDigits(a, b, c);
+    }
+
     public static int [] getDigits(long val, int n)
     {
         val = Math.abs(val);
@@ -20,6 +58,10 @@ public class NumberUtil {
             ;
 
         return digits;
+    }
+
+    private NumberUtil()
+    {
     }
 
     public static int countDigits(int val)
@@ -40,6 +82,11 @@ public class NumberUtil {
     public static int [] getDigits(long val)
     {
         return getDigits(val, 1);
+    }
+
+    public static int [] getDigits(int val)
+    {
+        return getDigits((long)val);
     }
 
     public static int [] getDigitsInTwos(long val)
@@ -219,5 +266,18 @@ public class NumberUtil {
     public static int min(int a, int b, int c)
     {
         return Math.min(Math.min(a, b), c);
+    }
+
+    public static String numToStr(long val)
+    {
+        int [] digitsInThrees = getDigitsInThrees(val);
+        String result =  val < 0 ? "eksi" : "";
+
+        val = Math.abs(val);
+
+        for (int d : digitsInThrees)
+            result += numberToText3DigitsTR(d) + ".....";
+
+        return result;
     }
 }

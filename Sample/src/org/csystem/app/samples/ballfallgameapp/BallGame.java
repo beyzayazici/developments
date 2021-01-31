@@ -1,7 +1,7 @@
 package org.csystem.app.samples.ballfallgameapp;
 
 public class BallGame {
-    public static boolean updateFlag(int ballIndex, boolean flag, int width)
+    private static boolean updateFlag(int ballIndex, boolean flag, int width)
     {
         if (ballIndex == 0)
             flag = true;
@@ -11,7 +11,7 @@ public class BallGame {
         return flag;
     }
 
-    public static int updateBallIndex(boolean flag, int ballIndex)
+    private static int updateBallIndex(boolean flag, int ballIndex)
     {
         if (flag)
             return ballIndex + 1;
@@ -19,35 +19,39 @@ public class BallGame {
         return ballIndex - 1;
     }
 
-    public String result;
+    private String m_result;
 
-    public BallGame()
-    {
-        result = "";
-    }
-
-    public void fillSpace(int begin, int end)
+    private void fillSpace(int begin, int end)
     {
         for (int i = begin; i < end; ++i)
-            result += ' ';
+            m_result += ' ';
     }
 
-    public void fillBall(int ballIndex, int end)
+    private void fillBall(int ballIndex, int end)
     {
         fillSpace(0, ballIndex);
-        result += '*';
+        m_result += '*';
         fillSpace(ballIndex + 1, end);
     }
 
+    public BallGame()
+    {
+        m_result = "";
+    }
+
+    public String getResult()
+    {
+        return m_result;
+    }
 
     public void play(int width, int height)
     {
         int ballIndex = 0;
         boolean flag = true;
-        result = "";
+        m_result = "";
 
         for (int i = 1; i <= height; ++i) {
-            result += '|';
+            m_result += '|';
 
             fillBall(ballIndex, width);
 
@@ -56,7 +60,7 @@ public class BallGame {
             if (width != 1)
                 ballIndex = updateBallIndex(flag, ballIndex);
 
-            result += "|\r\n";
+            m_result += "|\r\n";
         }
     }
 }

@@ -1,11 +1,14 @@
+/*----------------------------------------------------------------------------------------------------------------------
+    Lottary sınıfı
+----------------------------------------------------------------------------------------------------------------------*/
 package org.csystem.app.samples.lottaryapp;
 
 import java.util.Random;
 
 public class Lottary {
-    public Random random;
+    private final Random m_random;
 
-    public static int [] getNumbers(boolean [] flags)
+    private static int [] getNumbers(boolean [] flags)
     {
         int [] a = new int[6];
         int index = 0;
@@ -17,7 +20,7 @@ public class Lottary {
         return a;
     }
 
-    public boolean [] getFlags()
+    private boolean [] getFlags()
     {
         boolean [] flags = new boolean[50];
 
@@ -25,7 +28,7 @@ public class Lottary {
             int val;
 
             for (;;) {
-                val = random.nextInt(49) + 1;
+                val = m_random.nextInt(49) + 1;
                 if (!flags[val])
                     break;
             }
@@ -37,11 +40,21 @@ public class Lottary {
 
     public Lottary()
     {
-        random = new Random();
+        m_random = new Random();
     }
 
-    public int[] getColumn()
+    public int[] getNumbers()
     {
         return getNumbers(getFlags());
+    }
+
+    public int [][] getNumbers(int n)
+    {
+        int [][] c = new int[n][];
+
+        for (int i = 0; i < n; ++i)
+            c[i] = getNumbers();
+
+        return c;
     }
 }

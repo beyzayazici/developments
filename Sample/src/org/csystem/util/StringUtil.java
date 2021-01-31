@@ -11,6 +11,10 @@ import static java.lang.Character.toUpperCase;
 import java.util.Random;
 
 public class StringUtil {
+    private StringUtil()
+    {
+    }
+
     public static String capitalize(String s)
     {
         if (s.isBlank())
@@ -163,8 +167,8 @@ public class StringUtil {
     {
         String result = "";
 
-        for (int i = 0; i < str.length; ++i)
-            result += str[i] + delimiter;
+        for (String s : str)
+            result += s + delimiter;
 
         return result.substring(0, result.length() - delimiter.length());
     }
@@ -202,6 +206,23 @@ public class StringUtil {
         ArrayUtil.reverse(chars);
 
         return String.valueOf(chars);
+    }
+
+    public static String [] split(String str, String delimiters, StringSplitOptions stringSplitOptions)
+    {
+        String pattern = "[";
+
+        int length = delimiters.length();
+
+        for (int i = 0; i < length; ++i) {
+            char delim = delimiters.charAt(i);
+
+            pattern += delim == '[' || delim == ']' ? "\\" + delim : delim;
+        }
+
+        pattern += stringSplitOptions == StringSplitOptions.REMOVE_EMPTY_ENTRIES ? "]+" : "]";
+
+        return str.split(pattern);
     }
 
     public static String trimLeading(String s)
